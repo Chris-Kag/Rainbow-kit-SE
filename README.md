@@ -1,4 +1,9 @@
-# 🏗 Scaffold-Eth Typescript
+# Rainbow🌈 x Scaffold-Eth🏗️
+# 🌈🏗️✨
+
+![ezgif-2-72444e1982](https://user-images.githubusercontent.com/94156214/170820090-a46fe2c5-05e3-4583-97cc-63ece40737d7.gif)
+
+
 
 ## Typescript
 
@@ -45,6 +50,77 @@ Running the app
    # run subgraph commands for the workspace
    yarn subgraph 'xxx'
    ```
+## Install rainbow-kit
+1. Add the dependencies
+
+   ```bash
+   yarn add @rainbow-me/rainbowkit@^0.2.0 wagmi@^0.4.2
+   ```
+2. Configure in App.tsx
+    ```bash
+    import "@rainbow-me/rainbowkit/styles.css";
+   import { configureChains } from 'wagmi';
+   ```
+   
+   ////
+   
+   ```bash
+   import { alchemyProvider } from 'wagmi/providers/alchemy';
+   const { chains, provider } = configureChains(
+   [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
+   [alchemyProvider({ alchemyId: process.env.ALCHEMY_ID })]
+   ```
+  
+   OR
+
+   ```bash
+   import { infuraProvider } from 'wagmi/providers/infura';
+   const { chains, provider } = configureChains(
+   [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
+   [infuraProvider({ infuraId: process.env.INFURA_ID })]
+   ```
+
+   OR
+
+   ```bash
+   import { publicProvider } from 'wagmi/providers/public';
+   const { chains, provider } = configureChains(
+   [chain.mainnet, chain.polygon],
+   [publicProvider()]
+   ```
+
+   //////
+
+   ```bash
+   import {
+   getDefaultWallets,
+   RainbowKitProvider,
+   darkTheme
+   } from "@rainbow-me/rainbowkit";
+   import { chain, createClient, WagmiConfig } from "wagmi";
+
+   const { connectors } = getDefaultWallets({
+     appName: "My RainbowKit App",
+     chains
+   });
+
+   const wagmiClient = createClient({
+     autoConnect: true,
+     connectors,
+     provider
+   });
+   ```
+ 3. Wrap your app
+   ```bash
+   const App = () => {
+      return (
+         <WagmiConfig client={wagmiClient}>...</WagmiConfig>
+     );
+   };
+   ```
+And you're good to go!
+
+![Screenshot_6](https://user-images.githubusercontent.com/94156214/170820873-54e93231-d73b-4f70-b523-1609f495ab5b.png)
 
 ## Overview
 
